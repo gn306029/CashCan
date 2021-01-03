@@ -1,24 +1,23 @@
-# cash_can
+# Cash Can 零錢罐
 
-## Project setup
-```
-npm install
-```
+##### 紀錄荷包的一點一滴 d(`･∀･)b
+---
+專案說明：
+* 前端畫面使用 vue 所構築
+* 資料透過使用 PHP 所建立簡易的 RESTful API 來獲得
+* 採用 RWD，讓 mobile/desktop 端皆能有良好的體驗
+* 這個專案只包括了前端 vue 的程式碼，後端的會找時間放上來
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+現有功能：
+* 零錢罐的建立/修改/刪除
+* 零錢罐細項的建立/修改/刪除
+* 項目分類的的建立/修改/刪除
 
-### Compiles and minifies for production
-```
-npm run build
-```
+預計完成功能：
+* 零錢罐/細項的排序
+* 整理報表並輸出為 .xlsx 或 .csv 檔案
+* 相關功能的防呆/例外處理
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+##### 目前版本：v0.1.0
+##### 共同製作：chiaoshin
