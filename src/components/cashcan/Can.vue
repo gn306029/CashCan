@@ -29,12 +29,13 @@ export default {
     },
     props: {
         can_id: String,
-        can_name: String
+        can_name: String,
+        request_url: String
     },
     methods: {
         show_can_detail(can_id, can_name) {
             axios
-            .get(`https://cashcan.000webhostapp.com/CanDetail/${can_id}/`)
+            .get(`${this.request_url}CanDetail/${can_id}/`)
             .then((response) => {
                 this.modal_title = `${can_name} 明細`
                 // 檢查是否有資料
@@ -48,7 +49,6 @@ export default {
                             "item_id": response.data[i].item_id,
                             "item_name": response.data[i].item_name,
                             "amount": response.data[i].amount,
-                            "amount_class_name": response.data[i].amount_class_name,
                             "amount_type": response.data[i].amount_type,
                             "record_time": response.data[i].record_time,
                             "modify_date": response.data[i].modify_date

@@ -36,7 +36,8 @@ export default {
     name: "EditCan",
     props: {
         can_id: String,
-        can_name: String
+        can_name: String,
+        request_url: String
     },
     methods: {
         close_modal() {
@@ -59,7 +60,7 @@ export default {
             form_data.append("can_name", this.can_name);
 
             axios
-            .post('https://cashcan.000webhostapp.com/Can/edit/', form_data)
+            .post(`${this.request_url}Can/edit/`, form_data)
             .then((response) => {
                 // 檢查是否有資料變動
                 this.close_modal();
@@ -82,7 +83,7 @@ export default {
                 form_data.append("can_id", this.can_id);
 
                 axios
-                .post('https://cashcan.000webhostapp.com/Can/delete/', form_data)
+                .post(`${this.request_url}Can/delete/`, form_data)
                 .then((response) => {
                     // 檢查是否有資料變動
                     this.close_modal();

@@ -12,11 +12,6 @@
                         <router-link to="/add_item/" class="link"><i class="far fa-edit pe-1"></i>新增紀錄</router-link>
                     </button>
                 </div>
-                <div class="col-12 col-md-4 text-start mb-2 mb-sx-0">
-                    <button class="btn btn-outline-warning">
-                        <router-link to="/amount_class/" class="link"><i class="far fa-edit pe-1"></i>管理分類</router-link>
-                    </button>
-                </div>
             </div>
         </div>
         <div class="p-3">
@@ -31,6 +26,7 @@
                     <Can 
                         :can_id="detail.can_id"
                         :can_name="detail.can_name"
+                        :request_url="request_url"
                         v-on:render_detail="update_modal"
                         v-on:edit_can="edit_can"
                     >
@@ -41,6 +37,7 @@
         <CanDetail 
             :curr_items="this.items" 
             :curr_modal_title="this.modal_title"
+            :request_url="request_url"
             v-on:close_modal="close_modal"
             ref="CanDetail"
         >
@@ -48,6 +45,7 @@
         <EditCan 
             :can_id=select_can_id
             :can_name=select_can_name
+            :request_url=request_url
             v-on:close_edit_modal="close_edit_modal"
             v-on:edit_can_name="edit_can_name"
             v-on:reload_can="reload_can"
@@ -71,6 +69,9 @@ export default {
         Can,
         CanDetail,
         EditCan
+    },
+    props: {
+        request_url: String
     },
     data () {
         return {
@@ -102,7 +103,7 @@ export default {
     methods: {
         fetchData () {
             axios
-            .get('https://cashcan.000webhostapp.com/Can/')
+            .get(`${this.request_url}Can/`)
             .then((response) => {
                 // 檢查是否有資料
                 this.can_detail = {}

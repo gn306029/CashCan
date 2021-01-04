@@ -51,19 +51,6 @@
                             <input type="number" class="form-control" id="amount" placeholder="金額" step="1" :value="data.amount" @change="edit_amount" required>
                         </div>
                         <div class="col-12 text-start">
-                            <label for="amount_class" class="form-label">分類</label>
-                            <select id="amount_class" class="form-select" @change="edit_amount_class">
-                                <option 
-                                    v-for="class_obj in amount_class" 
-                                    :key="class_obj.amount_class_id" 
-                                    :value="class_obj.amount_class_id"
-                                    :selected="class_obj.amount_class_id == data.amount_class_id"
-                                >
-                                    {{ class_obj.amount_class_name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-12 text-start">
                             <label for="record_time" class="form-label">日期</label>
                             <input type="date" class="form-control" id="record_time" placeholder="選擇日期時間" :value="format_local_date(data.record_time)" @change="edit_record_date" :max="(new Date()).toJSON().substr(0,10)" required>
                         </div>
@@ -100,14 +87,14 @@ export default {
     },
     data() {
         return {
+            // request_url: "https://cashcan.000webhostapp.com/"
+            request_url: "http://localhost:520/cashcan_server/",
             can_items: {},
-            amount_class: {},
             data: {
                 save_can_id: 1,
                 item_name: "",
                 amount: 0,
                 amount_type: "收入",
-                amount_class_id: 1,
                 record_time: this.format_local_date(new Date())
             }
         }
@@ -119,7 +106,6 @@ export default {
         }
 
         this.get_all_exist_can();
-        this.get_all_amount_class();
     },
     mounted() {
         // 移除殘留的 modal 背景
@@ -133,7 +119,7 @@ export default {
         // 取得所有既有的零錢罐
         get_all_exist_can() {
             axios
-            .get('https://cashcan.000webhostapp.com/Can/')
+            .get(`${this.request_url}Can/`)
             .then((response) => {
                 // 檢查是否有資料
                 // 重置
@@ -148,33 +134,14 @@ export default {
                 }
             })
         },
-        // 取得所有既有的項目分類
-        get_all_amount_class() {
-            axios
-            .get('https://cashcan.000webhostapp.com/AmountClass/')
-            .then((response) => {
-                // 檢查是否有資料
-                // 重置
-                this.amount_class = {}
-                if(response.data.length > 0){
-                    for(let i in response.data){
-                        this.amount_class[i] = {
-                            "amount_class_id": response.data[i].amount_class_id,
-                            "amount_class_name": response.data[i].amount_class_name,
-                        }
-                    }
-                }
-            })
-        },
         // 取得既有的紀錄
         get_exist_record(can_id, item_id){
             axios
-            .get(`https://cashcan.000webhostapp.com/CanDetail/${can_id}/${item_id}/`)
+            .get(`${this.request_url}CanDetail/${can_id}/${item_id}/`)
             .then((response) => {
                 this.data.save_can_id = response.data.can_id;
                 this.data.item_id = response.data.item_id;
                 this.data.item_name = response.data.item_name;
-                this.data.amount_class_id = response.data.amount_class_id;
                 this.data.amount_type = response.data.amount_type;
                 this.data.amount = response.data.amount;
                 this.data.record_time = response.data.record_time;
@@ -198,10 +165,6 @@ export default {
                 this.data.save_can_id = document.getElementById("exist_can").value;
             }
 
-            if(this.data.save_can_id != document.getElementById("amount_class").value){
-                this.data.amount_class_id = document.getElementById("amount_class").value;
-            }
-
             let form_data = new FormData();
             
             form_data.append("can_id", this.data.save_can_id);
@@ -209,12 +172,10 @@ export default {
             form_data.append("amount", this.data.amount);
             form_data.append("item_id", this.item_id ? this.item_id : "NULL");
             form_data.append("amount_type", this.data.amount_type);
-            form_data.append("amount_class_id", this.data.amount_class_id);
             form_data.append("record_time", this.data.record_time);
 
             axios
-            //.post('http://localhost:520/cashcan_server/CanDetail/edit/', form_data)
-            .post('https://cashcan.000webhostapp.com/CanDetail/edit/', form_data)
+            .post(`${this.request_url}CanDetail/edit/`, form_data)
             .then((response) => {
 
                 if(response.data.effect_row > 0){
@@ -230,10 +191,6 @@ export default {
         // 更新日期
         edit_record_date(event) {
             this.data.record_time = event.target.value;
-        },
-        // 更新分類
-        edit_amount_class(event) {
-            this.data.amount_class_id = event.target.value;
         },
         // 更新金額
         edit_amount(event) {

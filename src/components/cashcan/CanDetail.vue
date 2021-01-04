@@ -14,9 +14,8 @@
                             <div class="col-1 m-auto"></div>
                             <div class="col-1 m-auto"></div>
                             <div class="col-3 m-auto">名稱</div>
-                            <div class="col-2 m-auto">金額</div>
-                            <div class="col-2 m-auto">時間</div>
-                            <div class="col-2 m-auto">分類</div>
+                            <div class="col-3 m-auto">金額</div>
+                            <div class="col-3 m-auto">時間</div>
                         </div>
                         <div v-if="curr_items" class="detail">
                             <div class="row py-2" v-for="item in curr_items" :key="item.item_id">
@@ -35,9 +34,8 @@
                                     <i class="far fa-trash-alt pointer" title="刪除紀錄" @click="delete_item(item.item_id, item.item_name)"></i>
                                 </div>
                                 <div class="col-3 m-auto">{{ item.item_name }}</div>
-                                <div class="col-2 m-auto">{{ item.amount }}</div>
-                                <div class="col-2 m-auto">{{ format_date(item.record_time) }}</div>
-                                <div class="col-2 m-auto">{{ item.amount_class_name }}</div>
+                                <div class="col-3 m-auto">{{ item.amount }}</div>
+                                <div class="col-3 m-auto">{{ format_date(item.record_time) }}</div>
                             </div>
                         </div>
                         <div class="row py-2" v-else>
@@ -70,7 +68,8 @@ export default {
     name: 'CanDetail',
     props: {
         curr_modal_title: String,
-        curr_items: Object
+        curr_items: Object,
+        request_url: String
     },
     data() {
         return {
@@ -138,7 +137,7 @@ export default {
                 form_data.append("item_id", item_id);
 
                 axios
-                .post('https://cashcan.000webhostapp.com/CanDetail/delete/', form_data)
+                .post(`${this.request_url}CanDetail/delete/`, form_data)
                 .then((response) => {
                     // 檢查是否有資料變動
                     this.close_modal();
