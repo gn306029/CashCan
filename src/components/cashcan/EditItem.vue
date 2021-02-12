@@ -73,6 +73,7 @@
 <script>
 
 import Navbar from '../common/Navbar.vue'
+import BasicMixin from '../Mixin/BasicMixin.vue';
 
 import axios from 'axios';
 
@@ -85,10 +86,9 @@ export default {
         can_id: [Number, String],
         item_id: [Number, String]
     },
+    mixins: [BasicMixin],
     data() {
         return {
-            // request_url: "https://cashcan.000webhostapp.com/",
-            request_url: "http://localhost:520/cashcan_server/",
             can_items: {},
             data: {
                 save_can_id: 1,

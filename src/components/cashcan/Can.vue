@@ -18,6 +18,7 @@
 <script>
 
 import axios from 'axios';
+import BasicMixin from '../Mixin/BasicMixin.vue';
 
 export default {
     name: 'Can',
@@ -27,10 +28,10 @@ export default {
             items: {}
         }
     },
+    mixins: [BasicMixin],
     props: {
         can_id: String,
-        can_name: String,
-        request_url: String
+        can_name: String
     },
     methods: {
         show_can_detail(can_id, can_name) {

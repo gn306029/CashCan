@@ -63,14 +63,15 @@
 <script>
 
 import axios from 'axios';
+import BasicMixin from '../Mixin/BasicMixin.vue';
 
 export default {
     name: 'CanDetail',
     props: {
         curr_modal_title: String,
-        curr_items: Object,
-        request_url: String
+        curr_items: Object
     },
+    mixins: [BasicMixin],
     data() {
         return {
             income: 0,

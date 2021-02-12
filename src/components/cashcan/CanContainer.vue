@@ -26,7 +26,6 @@
                     <Can 
                         :can_id="detail.can_id"
                         :can_name="detail.can_name"
-                        :request_url="request_url"
                         v-on:render_detail="update_modal"
                         v-on:edit_can="edit_can"
                     >
@@ -37,7 +36,6 @@
         <CanDetail 
             :curr_items="this.items" 
             :curr_modal_title="this.modal_title"
-            :request_url="request_url"
             v-on:close_modal="close_modal"
             ref="CanDetail"
         >
@@ -45,7 +43,6 @@
         <EditCan 
             :can_id=select_can_id
             :can_name=select_can_name
-            :request_url=request_url
             v-on:close_edit_modal="close_edit_modal"
             v-on:edit_can_name="edit_can_name"
             v-on:reload_can="reload_can"
@@ -72,9 +69,6 @@ export default {
         EditCan
     },
     mixins: [BasicMixin],
-    props: {
-        request_url: String
-    },
     data () {
         return {
             modal_title: "",

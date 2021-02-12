@@ -31,14 +31,15 @@
 <script>
 
 import axios from 'axios';
+import BasicMixin from '../Mixin/BasicMixin.vue';
 
 export default {
     name: "EditCan",
     props: {
         can_id: String,
-        can_name: String,
-        request_url: String
+        can_name: String
     },
+    mixins: [BasicMixin],
     methods: {
         close_modal() {
             this.$emit("close_edit_modal")

@@ -31,7 +31,6 @@ export default {
     mixins: [BasicMixin],
     data() {
         return {
-            request_url: "http://localhost:520/cashcan_server/",
             member_id: "",
             member_pwd: ""
         }
