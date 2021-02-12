@@ -67,12 +67,14 @@
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
 
 import Navbar from '../common/Navbar.vue'
+import Footer from '../common/Footer.vue';
 import BasicMixin from '../Mixin/BasicMixin.vue';
 
 import axios from 'axios';
@@ -80,7 +82,8 @@ import axios from 'axios';
 export default {
     name: 'EditItem',
     components: {
-        Navbar
+        Navbar,
+        Footer
     },
     props: {
         can_id: [Number, String],

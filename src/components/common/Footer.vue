@@ -13,13 +13,8 @@ export default {
 </script>
 
 <style>
-
-body {
-    overflow: hidden;
-}
-
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
 }
 </style>

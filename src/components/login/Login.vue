@@ -1,16 +1,18 @@
 <template>
-    <div class="container-fluid d-flex vh-100  ">
-        <div class="m-auto">
-            <div class="h2 font-weight-bold">Cash Can 零錢罐</div>
-            <div class="h6 text-secondary">紀錄生活的一點一滴</div>
-            <hr/>
-            <form id="login-form">
-                <input class="form-control my-2" type="text" maxlength="15" name="member_id" placeholder="輸入帳號" @change="edit_member_id">
-                <input class="form-control my-2" type="password" maxlength="15" name="member_pwd" placeholder="密碼" @change="edit_member_pwd">
-            </form>
-            <button id="login" class="btn btn-primary col-12" @click="login()">
-                登入
-            </button>
+    <div class="container-fluid vh-100">
+        <div class="row h-75">
+            <div class="col-12 col-sm-6 col-md-4 m-auto">
+                <div class="h2 font-weight-bold">Cash Can 零錢罐</div>
+                <div class="h6 text-secondary">紀錄生活的一點一滴</div>
+                <hr/>
+                <form id="login-form">
+                    <input class="form-control my-2" type="text" maxlength="15" name="member_id" placeholder="輸入帳號" @change="edit_member_id">
+                    <input class="form-control my-2" type="password" maxlength="15" name="member_pwd" placeholder="密碼" @change="edit_member_pwd">
+                </form>
+                <button id="login" class="btn btn-primary col-12" @click="login()">
+                    登入
+                </button>
+            </div>
         </div>
         <Footer></Footer>
     </div>
