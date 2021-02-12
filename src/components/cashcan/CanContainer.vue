@@ -61,6 +61,7 @@ import axios from 'axios';
 import Can from './Can.vue';
 import CanDetail from './CanDetail.vue';
 import EditCan from './EditCan.vue';
+import BasicMixin from '../Mixin/BasicMixin.vue';
 import * as bootstrap from 'bootstrap'
 
 export default {
@@ -70,6 +71,7 @@ export default {
         CanDetail,
         EditCan
     },
+    mixins: [BasicMixin],
     props: {
         request_url: String
     },

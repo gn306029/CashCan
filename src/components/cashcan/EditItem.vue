@@ -87,8 +87,8 @@ export default {
     },
     data() {
         return {
-            request_url: "https://cashcan.000webhostapp.com/",
-            // request_url: "http://localhost:520/cashcan_server/",
+            // request_url: "https://cashcan.000webhostapp.com/",
+            request_url: "http://localhost:520/cashcan_server/",
             can_items: {},
             data: {
                 save_can_id: 1,
