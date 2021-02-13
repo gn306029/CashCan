@@ -1,6 +1,6 @@
 <template>
     <div class="root">
-        <Navbar title="Cash Can"></Navbar>
+        <Navbar title="Cash Can" :is_login=is_login></Navbar>
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <CanContainer class="col-12 col-md-7">
