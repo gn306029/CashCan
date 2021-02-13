@@ -37,6 +37,9 @@ export default {
             member_pwd: ""
         }
     },
+    created() {
+        this.redirect_to_login()
+    },
     methods: {
         login() {
 

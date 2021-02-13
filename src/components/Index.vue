@@ -13,12 +13,17 @@
 <script>
 import Navbar from './common/Navbar.vue'
 import CanContainer from './cashcan/CanContainer.vue'
+import BasicMixin from './Mixin/BasicMixin.vue';
 
 export default {
   name: 'Index',
   components: {
     Navbar,
     CanContainer
+  },
+  mixins: [BasicMixin],
+  created() {
+    this.redirect_to_login()
   }
 }
 </script>
