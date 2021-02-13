@@ -6,12 +6,13 @@ export default {
     data() {
         return {
             //request_url: "https://cashcan.000webhostapp.com/"
-            request_url: "http://localhost:520/cashcan_server/"
+            request_url: "http://localhost:520/cashcan_server/",
+            is_login: false
         }
     },
     methods: {
         // 確認是否需要導到登入頁
-        redirect_to_login(){
+        async check_is_login(){
             if(this.$cookie.get('auth_key') && this.$cookie.get('member_id')){
 
                 let form_data = new FormData();
@@ -19,19 +20,17 @@ export default {
                 form_data.append("auth_key", this.$cookie.get('auth_key'));
                 form_data.append("member_id", this.$cookie.get('member_id'));
 
-                axios
+                return axios
                 .post(`${this.request_url}isLogin/`, form_data)
                 .then((response) => {
-                    if(location.href.split("/").pop() == "Login" ){
-                        if(response["data"]["status_code"] == "success"){
-                            location.href = "/";
-                        }
+                    if(response["data"]["status_code"] == "success"){
+                        this.is_login = true;
                     }else{
-                        if(response["data"]["status_code"] == "error"){
-                            location.href = "/Login";
-                        }
+                        this.is_login = false;
                     }
                 })
+            }else{
+                this.is_login = false;
             }
         }
     }

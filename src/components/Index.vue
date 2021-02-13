@@ -22,8 +22,12 @@ export default {
     CanContainer
   },
   mixins: [BasicMixin],
-  created() {
-    this.redirect_to_login()
+  async created() {
+    await this.check_is_login();
+    
+    if(!this.is_login){
+      location.href = "/Login";
+    }
   }
 }
 </script>
@@ -37,6 +41,14 @@ export default {
 
 * {
   font-family: "Montserrat";
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
 }
 
 </style>
