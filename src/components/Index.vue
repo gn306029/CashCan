@@ -22,3 +22,16 @@ export default {
   }
 }
 </script>
+
+<style>
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("../assets/font/Montserrat-Light.ttf");
+}
+
+* {
+  font-family: "Montserrat";
+}
+
+</style>
