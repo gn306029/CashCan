@@ -37,7 +37,17 @@ export default {
                 .post(`${this.request_url}Logout/`, form_data)
                 .then((response) => {
                     if(response["data"]["status_code"] == "success"){
-                        location.href = "/Login";
+                        if(this.$cookie.get("use_google")){
+                            this.$gapi.getGapiClient().then((gapi) => {
+                                let auth2 = gapi.auth2.getAuthInstance();
+                                auth2.signOut().then(function () {
+                                    auth2.disconnect();
+                                    location.href = "/Login";
+                                });
+                            });
+                        }else{
+                            location.href = "/Login";
+                        }
                     }else{
                         Swal.fire({
                             icon: 'error',

@@ -12,6 +12,8 @@
                 <button id="login" class="btn btn-primary col-12" @click="login()">
                     登入
                 </button>
+                <hr/>
+                <div id="google-signin-btn"></div>
             </div>
         </div>
         <Footer></Footer>
@@ -42,6 +44,15 @@ export default {
         if(this.is_login){
             location.href = "/";
         }
+    },
+    mounted() {
+        this.$gapi.getGapiClient().then((gapi) => {
+            if(!gapi.auth2.getAuthInstance().isSignedIn.get()){
+                gapi.signin2.render('google-signin-btn', { // this is the button "id"
+                    onsuccess: this.onSignIn // note, no "()" here
+                });
+            }
+        });
     },
     methods: {
         login() {
@@ -84,6 +95,27 @@ export default {
                     });
                 }
             })
+        },
+        onSignIn(result) {
+            this.member_id = result.getBasicProfile().getEmail();
+            this.member_pwd = result.getBasicProfile().getId();
+
+            let form_data = new FormData();
+            
+            form_data.append("member_id", this.member_id);
+            form_data.append("member_pwd", this.member_pwd);
+            form_data.append("member_name", result.getBasicProfile().getName());
+
+            result.disconnect();
+
+            axios
+            .post(`${this.request_url}SignUp/`, form_data)
+            .then((response) => {
+                if(response.data.status_code != "error"){
+                    this.login();
+                    this.$cookie.set('use_google', true);
+                }
+            });
         },
         edit_member_id(event) {
             this.member_id = event.target.value;
