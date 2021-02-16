@@ -26,7 +26,7 @@ export default {
     await this.check_is_login();
     
     if(!this.is_login){
-      location.href = "/Login";
+      this.$router.push("Login");
     }
   }
 }

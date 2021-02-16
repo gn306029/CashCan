@@ -20,7 +20,7 @@ const routes = [
     component: Index
   },
   {
-    path: '/login',
+    path: '/Login',
     name: 'Login',
     component: Login
   },
