@@ -101,7 +101,7 @@ export default {
     methods: {
         fetchData () {
             axios
-            .get(`${this.request_url}Can/`)
+            .post(`${this.request_url}Can/`, this.get_basic_form())
             .then((response) => {
                 // 檢查是否有資料
                 this.can_detail = {}
