@@ -6,7 +6,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ml-auto">
-                <p v-if="isLogin" class="nav-item nav-link active mb-0" id="logout" @click="logout()">登出</p>
+                <p v-text="'嗨~'+this.$cookie.get('member_name')" class="nav-item nav-link active mb-0"></p>
+                <p v-if="isLogin" class="nav-item nav-link mb-0" id="logout" @click="logout()">登出</p>
             </div>
         </div>
     </nav>

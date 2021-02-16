@@ -78,6 +78,7 @@ export default {
                     }).then(() => {
                         this.$cookie.set('auth_key', response["data"]["auth_key"], 1440);
                         this.$cookie.set('member_id', this.member_id, 1440);
+                        this.$cookie.set('member_name', response["data"]["member_name"], 1440);
                         location.href = "/";
                     });
                 }else{
