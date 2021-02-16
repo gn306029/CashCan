@@ -75,6 +75,7 @@
 
 import Navbar from '../common/Navbar.vue'
 import Footer from '../common/Footer.vue';
+import Swal from 'sweetalert2'
 import BasicMixin from '../Mixin/BasicMixin.vue';
 
 import axios from 'axios';
@@ -122,7 +123,7 @@ export default {
         // 取得所有既有的零錢罐
         get_all_exist_can() {
             axios
-            .get(`${this.request_url}Can/`)
+            .post(`${this.request_url}Can/`, this.get_basic_form())
             .then((response) => {
                 // 檢查是否有資料
                 // 重置
@@ -140,7 +141,7 @@ export default {
         // 取得既有的紀錄
         get_exist_record(can_id, item_id){
             axios
-            .get(`${this.request_url}CanDetail/${can_id}/${item_id}/`)
+            .post(`${this.request_url}CanDetail/${can_id}/${item_id}/`, this.get_basic_form())
             .then((response) => {
                 this.data.save_can_id = response.data.can_id;
                 this.data.item_id = response.data.item_id;
@@ -168,7 +169,7 @@ export default {
                 this.data.save_can_id = document.getElementById("exist_can").value;
             }
 
-            let form_data = new FormData();
+            let form_data = this.get_basic_form();
             
             form_data.append("can_id", this.data.save_can_id);
             form_data.append("item_name", this.data.item_name);
@@ -181,13 +182,23 @@ export default {
             .post(`${this.request_url}CanDetail/edit/`, form_data)
             .then((response) => {
 
-                if(response.data.effect_row > 0){
-                    alert("編輯完成");
+                if(response.data.status_code == "success"){
+                    Swal.fire({
+                        icon: "success",
+                        title: "編輯完成",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(() => {
+                        location.href = "/";
+                    });
                 }else{
-                    alert("編輯失敗");
+                    Swal.fire({
+                        icon: "error",
+                        title: response.data["status_message"],
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 }
-
-                window.location.href = "/";
             })
 
         },
