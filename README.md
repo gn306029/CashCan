@@ -25,6 +25,7 @@
 
 待修 BUG：
 * Vue Router 在 history 模式下 Refresh 非 / 的頁面會出現 404
+* 手機板 Google oAuth 登入會卡很久或登不進去
 
 v0.3.0 新增功能：
 * 登入/登出 (含使用 Google oAuth 登入)
