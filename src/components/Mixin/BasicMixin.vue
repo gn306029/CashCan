@@ -32,6 +32,22 @@ export default {
             }else{
                 this.is_login = false;
             }
+        },
+        // 取得當前 user ID
+        get_user_id(){
+            return this.$cookie.get('member_id');
+        },
+        // 取得 auth key
+        get_auth_key(){
+            return this.$cookie.get('auth_key');
+        },
+        // 取得 basic form data 物件
+        get_basic_form(){
+            let form_data = new FormData();
+            form_data.append("member_id", this.get_user_id());
+            form_data.append("auth_key", this.get_auth_key());
+
+            return form_data;
         }
     }
 }
