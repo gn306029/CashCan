@@ -30,7 +30,7 @@ export default {
     },
     mixins: [BasicMixin],
     props: {
-        can_id: String,
+        can_id: [Number, String],
         can_name: String
     },
     methods: {
