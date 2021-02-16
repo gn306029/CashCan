@@ -63,6 +63,7 @@
 <script>
 
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import BasicMixin from '../Mixin/BasicMixin.vue';
 
 export default {
@@ -133,7 +134,7 @@ export default {
             const confirm_delete = confirm(`確定移除 ${item_name}?`);
             
             if(confirm_delete){
-                let form_data = new FormData();
+                let form_data = this.get_basic_form();
             
                 form_data.append("item_id", item_id);
 
@@ -143,10 +144,20 @@ export default {
                     // 檢查是否有資料變動
                     this.close_modal();
 
-                    if(response.data.effect_row > 0){
-                        alert("移除完成");
+                    if(response.data.status_code == "success"){
+                        Swal.fire({
+                            icon: "success",
+                            title: "移除完成",
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     }else{
-                        alert("移除失敗");
+                        Swal.fire({
+                            icon: "error",
+                            title: response.data["status_message"],
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
                     }
                 })
             }
