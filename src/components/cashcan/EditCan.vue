@@ -31,12 +31,13 @@
 <script>
 
 import axios from 'axios';
+import Swal from 'sweetalert2'
 import BasicMixin from '../Mixin/BasicMixin.vue';
 
 export default {
     name: "EditCan",
     props: {
-        can_id: String,
+        can_id: [String, Number],
         can_name: String
     },
     mixins: [BasicMixin],
@@ -55,7 +56,7 @@ export default {
                 return;
             }
 
-            let form_data = new FormData();
+            let form_data = this.get_basic_form();
             
             form_data.append("can_id", this.can_id);
             form_data.append("can_name", this.can_name);
@@ -66,10 +67,20 @@ export default {
                 // 檢查是否有資料變動
                 this.close_modal();
 
-                if(response.data.effect_row > 0){
-                    alert("編輯完成");
+                if(response.data.status_code == "success"){
+                    Swal.fire({
+                        icon: "success",
+                        title: "編輯完成",
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 }else{
-                    alert("編輯失敗");
+                    Swal.fire({
+                        icon: "error",
+                        title: response.data["status_message"],
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
                 }
 
                 this.$emit("reload_can");
