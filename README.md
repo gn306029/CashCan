@@ -24,7 +24,7 @@
 * FB 登入
 
 待修 BUG：
-* 手機板 Google oAuth 登入會卡很久或登不進去
+* 無
 
 v0.3.0 新增功能：
 * 登入/登出 (含使用 Google oAuth 登入)
@@ -33,6 +33,7 @@ v0.3.0 新增功能：
 
 v0.3.1 修復 BUG：
 * Vue Router 在 history 模式下 Refresh 非 / 的頁面會出現 404
+* 手機板 Google oAuth 登入會卡很久或登不進去 (測試使用三星網際網路/Chrome 為正常的，Line 內建瀏覽器可能有些問題，會導不回去)
 
 ##### 目前版本：v0.3.1
 ##### 共同製作：chiaoshin
