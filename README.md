@@ -24,7 +24,6 @@
 * FB 登入
 
 待修 BUG：
-* Vue Router 在 history 模式下 Refresh 非 / 的頁面會出現 404
 * 手機板 Google oAuth 登入會卡很久或登不進去
 
 v0.3.0 新增功能：
@@ -32,5 +31,8 @@ v0.3.0 新增功能：
 * 使用 SweetAlert 取代多數的 alert
 * 後端 API SERVER 增加前端資料的驗證
 
-##### 目前版本：v0.3.0
+v0.3.1 修復 BUG：
+* Vue Router 在 history 模式下 Refresh 非 / 的頁面會出現 404
+
+##### 目前版本：v0.3.1
 ##### 共同製作：chiaoshin
